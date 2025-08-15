@@ -1,4 +1,4 @@
-This repository contains sample practice laboratories for configuring of Cisco networking devices using Cisco Packet Tracer.
-This serves as my practice for the 200-301 CCNA certification examination.
-Please bear with my slow-pacing.
-Thanks.
+This repository contains sample practice laboratories for configuring of Cisco networking devices using Cisco Packet Tracer.<br>
+This serves as my practice for the 200-301 CCNA certification examination.<br>
+Please bear with me and my slow pacing.<br>
+Thanks.<br>
