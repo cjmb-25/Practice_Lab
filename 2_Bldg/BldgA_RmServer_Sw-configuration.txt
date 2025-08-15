@@ -1,0 +1,109 @@
+BldgA_RmServ_Sw-configuration:
+-----
+enable
+configure terminal
+no ip domain-lookup
+hostname
+banner motd $
+Unauthorized Access Not Allowed!
+Simulation Credentials
+Username: admin
+Password: admin12345!
+$
+ip domain-name BldgA.com
+logging on
+enable secret admin12345!
+username admin privilege 0 secret admin12345!
+crypto key generate rsa general-keys modulus 1024
+ip ssh version 2
+ip ssh time-out 120
+ip ssh authentication-retries 3
+
+line console 0
+motd-banner
+login local
+exec-timeout 3 0
+privilege level 0
+logging synchronous
+exit
+
+line vty 0 15
+motd-banner
+login local
+transport input ssh
+exec-timeout 3 0
+privilege level 0
+logging synchronous
+exit
+
+vtp domain SwitchDomain.com
+vtp mode server
+vtp password admin12345!
+
+vlan 10
+name Management
+exit
+
+vlan 20
+name Administration
+exit
+
+vlan 30
+name Accounting
+exit
+
+vlan 40
+name Operations
+exit
+
+vlan 50
+name IT
+exit
+
+vlan 60
+name Engineering
+exit
+
+vlan 70
+name HR
+exit
+
+vlan 80
+name Sales
+exit
+
+interface range FastEthernet 0/1-3
+switchport mode trunk
+channel-group 1 mode desirable
+exit
+
+interface port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80
+exit
+
+interface range FastEthernet 0/4-6
+switchport mode trunk
+channel-group 2 mode desirable
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80
+exit
+
+interface range FastEthernet 0/7-9
+switchport mode trunk
+channel-group 3 mode desirable
+exit
+
+interface port-channel 3
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80
+exit
+
+spanning-tree vlan 10,20,30,40,50,60,70,80 root primary
+service password-encryption
+exit
+copy running-config startup-config
+-----
