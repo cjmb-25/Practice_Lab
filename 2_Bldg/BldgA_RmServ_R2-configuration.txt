@@ -1,0 +1,131 @@
+BldgA_RmServ_R2-configuration:
+-----
+enable
+configure terminal
+no ip domain-lookup
+hostname BldgA_RmServ-R2
+banner motd $
+Unauthorized Access Not Allowed!
+Simulation Credentials
+Username: admin
+Password: admin12345!
+$
+ip domain-name BldgA.com
+logging on
+enable secret admin12345!
+username admin privilege 0 secret admin12345!
+crypto key generate rsa general-keys modulus 1024
+ip ssh version 2
+ip ssh time-out 120
+ip ssh authentication-retries 3
+
+line console 0
+motd-banner
+login local
+exec-timeout 3 0
+privilege level 0
+logging synchronous
+exit
+
+line vty 0 15
+motd-banner
+login local
+transport input ssh
+exec-timeout 3 0
+privilege level 0
+logging synchronous
+exit
+
+interface GigabitEthernet 0/0.10
+encapsulation dot1Q 10
+ip address 192.168.1.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.20
+encapsulation dot1Q 20
+ip address 192.168.2.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.30
+encapsulation dot1Q 30
+ip address 192.168.3.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.40
+encapsulation dot1Q 40
+ip address 192.168.4.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.50
+encapsulation dot1Q 50
+ip address 192.168.5.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.60
+encapsulation dot1Q 60
+ip address 192.168.6.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.70
+encapsulation dot1Q 70
+ip address 192.168.7.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0.80
+encapsulation dot1Q 80
+ip address 192.168.8.1 255.255.255.0
+exit
+
+interface GigabitEthernet 0/0
+no shutdown
+exit
+
+ip dhcp excluded-address 192.168.1.1
+ip dhcp excluded-address 192.168.2.1
+ip dhcp excluded-address 192.168.3.1
+ip dhcp excluded-address 192.168.4.1
+ip dhcp excluded-address 192.168.5.1
+ip dhcp excluded-address 192.168.5.2
+ip dhcp excluded-address 192.168.5.3
+ip dhcp excluded-address 192.168.5.4
+ip dhcp excluded-address 192.168.5.5
+ip dhcp excluded-address 192.168.6.1
+ip dhcp excluded-address 192.168.7.1
+ip dhcp excluded-address 192.168.8.1
+
+ip dhcp pool vlan10
+network 192.168.1.0 255.255.255.0
+exit
+
+ip dhcp pool vlan20
+network 192.168.2.0 255.255.255.0
+exit
+
+ip dhcp pool vlan30
+network 192.168.3.0 255.255.255.0
+exit
+
+ip dhcp pool vlan40
+network 192.168.4.0 255.255.255.0
+exit
+
+ip dhcp pool vlan50
+network 192.168.5.0 255.255.255.0
+exit
+
+ip dhcp pool vlan60
+network 192.168.6.0 255.255.255.0
+exit
+
+ip dhcp pool vlan70
+network 192.168.7.0 255.255.255.0
+exit
+
+ip dhcp pool vlan80
+network 192.168.8.0 255.255.255.0
+exit
+
+service password-encryption
+exit
+copy running-config startup-config
+-----

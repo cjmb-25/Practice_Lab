@@ -78,6 +78,11 @@ interface range FastEthernet 0/16-21
 switchport access vlan 60
 exit
 
+interface vlan 50
+ip address 192.168.5.4 255.255.255.0
+exit
+ip default-gateway 192.168.5.1
+
 spanning-tree vlan 40,50,60 root secondary
 service password-encryption
 exit
