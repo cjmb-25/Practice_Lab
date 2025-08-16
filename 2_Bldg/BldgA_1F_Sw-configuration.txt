@@ -36,12 +36,17 @@ privilege level 0
 logging synchronous
 exit
 
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,30,40,50,60,70,80
+ip dhcp snooping database flash:snoop.db
+
 vtp domain SwitchDomain.com
 vtp password admin12345!
 vtp mode client
 
 interface range FastEthernet 0/22-24
 switchport mode trunk
+ip dhcp snooping trust
 channel-group 2 mode desirable
 exit
 
